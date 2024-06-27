@@ -1,12 +1,12 @@
 final createTable = '''
   CREATE TABLE contact(
-    id INT NOT NULL PRIMARY KEY AUTOINCREMENT
-    ,nome VARCHAR(200) NOT NULL
-    ,telefone CHAR(16) NOT NULL
-    ,email VARCHAR(150) NOT NULL
-    ,url_avatar VARCHAR(300) NOT NULL
-    )
-  ''';
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(200) NOT NULL,
+    telefone CHAR(16) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    url_avatar VARCHAR(300) NOT NULL
+  )
+''';
 
 final insert = '''
 INSERT INTO contact(nome, telefone, email, url_avatar)
