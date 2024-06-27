@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_flutter/app/database/sqlite/connection.dart';
+import 'package:projeto_flutter/app/database/sqlite/dao/contact_dao_impl.dart';
+import 'package:projeto_flutter/app/domain/entities/contact.dart';
 import 'package:projeto_flutter/app/my_app.dart';
-import 'package:sqflite/sqflite.dart';
 
 class ContactList extends StatelessWidget {
-  Future<List<Map<String, dynamic>>> _getList() async {
-    Database db = await Connection.get();
-
-    List<Map<String, dynamic>> results = await db.query('contact');
-    return results;
+  Future<List<Contact>> _getList() async {
+    return ContactDAOImpl().find();
   }
 
   @override
@@ -21,7 +18,7 @@ class ContactList extends StatelessWidget {
         } else if (snapshot.hasError) {
           return Center(child: Text('Erro ao carregar dados.'));
         } else if (snapshot.hasData) {
-          var lista = snapshot.data as List<Map<String, dynamic>>?;
+          List<Contact> lista = (snapshot.data! as List).cast<Contact>();
           return Scaffold(
             appBar: AppBar(
               title: Text('Lista de Contatos'),
@@ -34,16 +31,16 @@ class ContactList extends StatelessWidget {
               ],
             ),
             body: ListView.builder(
-              itemCount: lista?.length,
+              itemCount: lista.length,
               itemBuilder: (context, i) {
-                var contato = lista?[i];
+                var contato = lista[i];
                 var avatar = CircleAvatar(
-                  backgroundImage: NetworkImage(contato?['url_avatar']),
+                  backgroundImage: NetworkImage(contato.urlAvatar ?? ''),
                 );
                 return ListTile(
                   leading: avatar,
-                  title: Text(contato?['nome'].toString() ?? ''),
-                  subtitle: Text(contato?['telefone'].toString() ?? ''),
+                  title: Text(contato.nome.toString()),
+                  subtitle: Text(contato.telefone.toString()),
                   trailing: Container(
                     width: 100,
                     child: Row(
