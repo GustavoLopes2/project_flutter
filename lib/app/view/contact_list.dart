@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
-import 'package:projeto_flutter/app/database/script.dart';
+import 'package:projeto_flutter/app/database/sqlite/connection.dart';
 import 'package:projeto_flutter/app/my_app.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ContactList extends StatelessWidget {
   Future<List<Map<String, dynamic>>> _getList() async {
-    String path = join(await getDatabasesPath(), 'banco.db');
-    Database db = await openDatabase(path, version: 1, onCreate: (db, v) {
-      db.execute(createTable);
-      db.execute(insert);
-      db.execute(insert1);
-      db.execute(insert2);
-    });
-    List<Map<String, dynamic>> results = await db.query('contact');
+    Database db = await Connection.get();
 
+    List<Map<String, dynamic>> results = await db.query('contact');
     return results;
   }
 
