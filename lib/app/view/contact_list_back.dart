@@ -27,11 +27,11 @@ abstract class _ContactListBack with Store {
   goToForm(BuildContext context, [Contact? contact]) {
     Navigator.of(context)
         .pushNamed(MyApp.CONTACT_FORM, arguments: contact)
-        .then(refreshList());
+        .then((_) => refreshList());
   }
 
-  remove(int id) {
-    _service.remove(id);
+  remove(int id) async {
+    await _service.remove(id);
     refreshList();
   }
 }
