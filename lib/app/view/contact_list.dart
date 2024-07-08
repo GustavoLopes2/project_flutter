@@ -68,7 +68,7 @@ class ContactList extends StatelessWidget {
                       var contato = lista[i];
                       return ListTile(
                         onTap: () {
-                          _back.goToDetails(context);
+                          _back.goToDetails(context, contato);
                         },
                         leading: circleAvatar(contato.urlAvatar ?? ''),
                         title: Text(contato.nome.toString()),
