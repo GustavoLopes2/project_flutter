@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:projeto_flutter/app/domain/entities/contact.dart';
-import 'package:projeto_flutter/app/my_app.dart';
 import 'package:projeto_flutter/app/view/contact_list_back.dart';
 
 class ContactList extends StatelessWidget {
@@ -49,7 +48,7 @@ class ContactList extends StatelessWidget {
           actions: [
             IconButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(MyApp.CONTACT_FORM);
+                  _back.goToForm(context);
                 },
                 icon: Icon(Icons.add))
           ],
@@ -68,6 +67,9 @@ class ContactList extends StatelessWidget {
                     itemBuilder: (context, i) {
                       var contato = lista[i];
                       return ListTile(
+                        onTap: () {
+                          _back.goToDetails(context);
+                        },
                         leading: circleAvatar(contato.urlAvatar ?? ''),
                         title: Text(contato.nome.toString()),
                         subtitle: Text(contato.telefone.toString()),

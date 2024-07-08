@@ -30,6 +30,10 @@ abstract class _ContactListBack with Store {
         .then((_) => refreshList());
   }
 
+  goToDetails(BuildContext context) {
+    Navigator.of(context).pushNamed(MyApp.CONTACT_DETAILS);
+  }
+
   remove(int id) async {
     await _service.remove(id);
     refreshList();
