@@ -3,6 +3,7 @@ plugins {
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
+    id 'com.google.gms.google-services'
 }
 
 def localProperties = new Properties()
@@ -51,8 +52,15 @@ android {
             signingConfig = signingConfigs.debug
         }
     }
+
+}
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10"
+    implementation 'com.google.firebase:firebase-firestore-ktx'
 }
 
 flutter {
     source = "../.."
 }
+
+apply plugin: 'com.google.gms.google-services'
